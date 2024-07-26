@@ -38,7 +38,9 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'stock' => 'required|integer'
+            'stock' => 'required|integer',
+            'description' => 'required|string|max:255',
+            'rating' => 'required|integer'
         ]);
 
         Product::create($request->all());
@@ -76,6 +78,8 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
+            'description' => 'required|string|max:255',
+            'rating' => 'required|integer'
         ]);
 
         $product = Product::find($id);

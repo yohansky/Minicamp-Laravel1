@@ -16,6 +16,14 @@
             <label for="name" class="col-2">Stock:</label>
             <input type="number" class="form-control col-10" name="stock" id="stock" required>
         </div>
+        <div class="input-group mb-3 row">
+            <label for="name" class="col-2">Description:</label>
+            <input type="text" class="form-control col-10" name="description" id="description">
+        </div>
+        <div class="input-group mb-3 row">
+            <label for="name" class="col-2">Rating:</label>
+            <input type="number" class="form-control col-10" name="rating" id="rating" required>
+        </div>
         <br>
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>

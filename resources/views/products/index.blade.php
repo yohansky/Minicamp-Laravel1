@@ -8,6 +8,8 @@
                 <th>Nama</th>
                 <th>Harga (Rp.)</th>
                 <th>Stock (pcs)</th>
+                <th>Deskripsi</th>
+                <th>Rating</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -17,6 +19,8 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->stock }}</td>
+                <td>{{ $product->description }}</td>
+                <td>{{ $product->rating }}</td>
                 <td>
                     <a href="{{ route('products.show', $product->id)}}" class="btn btn-info">Detail</a>
                     <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary">Edit</a>

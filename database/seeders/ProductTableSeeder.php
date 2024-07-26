@@ -30,10 +30,10 @@ class ProductTableSeeder extends Seeder
         // ]);
 
         // jika memakai factory akan otomatis terisi created at dan deleted atnya
-        Product::factory()->create([
-            'name' => 'Celana',
-            'price' => 20000,
-            'stock' => 15,
-        ]);
+        // Product::factory()->create([
+        //     'name' => 'Celana',
+        //     'price' => 20000,
+        //     'stock' => 15,
+        // ]);
     }
 }
