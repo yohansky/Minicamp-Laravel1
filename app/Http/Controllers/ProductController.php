@@ -102,7 +102,11 @@ class ProductController extends Controller
 
     /*===========API===========*/
 
-    // public function list_product()
+    public function list_product()
+    {
+        $products = Product::all();
+        return response()->json($products);
+    }
 
     // public function detail_product($id)
 

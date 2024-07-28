@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Tambah Produk Baru</h2>
+    <h2>Edit Produk Baru</h2>
     <form action="{{ route('products.update', $product->id) }}" method="POST">
         @csrf
         @method('PUT')
