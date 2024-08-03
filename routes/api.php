@@ -30,6 +30,6 @@ Route::post('/create-product', [ProductController::class, 'create_product']);
 
 Route::put('/update-product/{id}', [ProductController::class, 'update_product']);
 
-Route::delete('/delete-product', [ProductController::class, 'delete_prodcut']);
+Route::delete('/delete-product', [ProductController::class, 'delete_product']);
 
-Route::get('/list-category', [CategoryController::class, "list_category"]);
+// Route::get('/list-category', [CategoryController::class, "list_category"]);

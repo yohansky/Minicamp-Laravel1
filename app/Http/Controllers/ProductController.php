@@ -7,17 +7,39 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $products = Product::all();
+        // $products = Product::all();
+        // $products = Product::paginate(5);
         // return response()->json($products);
         // memanggil view di folder views>products>index
+        $query = $request->input('query');
+        $order = $request->input('order', "name");
+        $sort = $request->input('sort',"asc");
+
+        $products = Product::where($order, 'like', '%'.$query.'%')
+                        ->orderBy($order, $sort)
+                        ->paginate(5);
+
         return view('products.index', compact('products'));
     }
+
+    public function search(Request $request)
+    {
+    $query = $request->input('query'); // Mendapatkan kata kunci pencarian dari input form
+
+    $products = Product::where('name', 'like', "%$query%")->paginate(10); // Menampilkan 10 produk per halaman
+
+    return view('products.index', compact('products'));
+}   
 
 
     /**
@@ -102,17 +124,62 @@ class ProductController extends Controller
 
     /*===========API===========*/
 
-    public function list_product()
+    public function list_product(Request $request)
     {
-        $products = Product::all();
+        $total = $request->input('limit',5);
+        $query = $request->input('query',"");
+        $order = $request->input('order', "name");
+        $sort = $request->input('sort',"asc");
+
+        $products = Product::where($order, 'like', '%'.$query.'%')
+                        ->orderBy($order, $sort)
+                        ->paginate($total);
+
         return response()->json($products);
     }
 
-    // public function detail_product($id)
+    public function detail_product($id)
+    {
+        $product = Product::find($id);
+        return response()->json($product);
+    }
 
-    // public function create_product(Request $request)
+    public function create_product(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer',
+            'description' => 'required|string|max:255',
+            'rating' => 'required|integer'
+        ]);
 
-    // public function update_product(Request $request, $id)
+        Product::create($request->all());
 
-    // public function delete_product($id)
+        return response()->json(['message' => 'Produk berhasil disimpan'], 201);
+    }
+
+    public function update_product(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer',
+            'description' => 'required|string|max:255',
+            'rating' => 'required|integer'
+        ]);
+
+        $product = Product::find($id);
+        $product->update($request->all());
+
+        return response()->json(['message' => 'Produk berhasil diupdate'], 201);
+    }
+
+    public function delete_product($id)
+    {
+        $product = Product::find($id);
+        $product->delete();
+
+        return response()->json(['message' => 'Produk berhasil dihapus'], 201);
+    }
 }

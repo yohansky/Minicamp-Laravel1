@@ -23,19 +23,21 @@ Route::get('/', function () {
 
 // ================= Product routes =================
 
-Route::get('/list-product', [ProductController::class, "list_product"]);
+// Route::get('/list-product', [ProductController::class, "list_product"]);
 
-Route::get('/products', [ProductController::class,"index"])->name('products.index');
+Route::get('/products', [ProductController::class,"index"])->name('products.index')->middleware('auth');
 
 Route::get('/products/create', [ProductController::class,"create"])->name('products.create');
 
 Route::post('products', [ProductController::class,"store"])->name('products.store');
 
-Route::get('/products/{id}', [ProductController::class,"show"])->name('products.show');
+Route::get('/products/detail/{id}', [ProductController::class,"show"])->name('products.show');
 
 Route::get('/products/{id}/edit', [ProductController::class,"edit"])->name('products.edit');
 
 Route::put('/products/{id}', [ProductController::class,"update"])->name('products.update');
+
+Route::get('/products/search', [ProductController::class,"search"])->name('products.search');
 
 Route::delete('/products/{id}', [ProductController::class,"destroy"])->name('products.destroy');
 
@@ -56,3 +58,6 @@ Route::get('/categories/{id}/edit', [CategoryController::class,"edit"])->name('c
 Route::put('/categories/{id}', [CategoryController::class,"update"])->name('categories.update');
 
 Route::delete('/categories/{id}', [CategoryController::class,"destroy"])->name('categories.destroy');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

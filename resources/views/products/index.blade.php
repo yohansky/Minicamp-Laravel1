@@ -2,14 +2,51 @@
 
 @section('content')
     <h2>Daftar Produk</h2>
+        <form action="{{ route('products.search') }}" method="GET">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Cari produk..." name="query" value="{{ request('query') }}">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                <a href="{{ route('products.index') }}" class="btn btn-outline-secondary">Clear</a>
+            </div>
+        </div>
+    </form>
     <table class="table">
         <thead>
             <tr>
-                <th>Nama</th>
-                <th>Harga (Rp.)</th>
-                <th>Stock (pcs)</th>
+                <th>Nama
+                    <a href="{{ route('products.index', ['sort' => 'asc','order' => 'name']) }}">
+                        <i class="fas fa-arrow-up"></i>
+                    </a>
+                    <a href="{{ route('products.index', ['sort' => 'desc','order' => 'name']) }}">
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
+                </th>
+                <th>Harga (Rp.)
+                    <a href="{{ route('products.index', ['sort' => 'asc','order' => 'price']) }}">
+                        <i class="fas fa-arrow-up"></i>
+                    </a>
+                    <a href="{{ route('products.index', ['sort' => 'desc','order' => 'price']) }}">
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
+                </th>
+                <th>Stock (pcs)
+                    <a href="{{ route('products.index', ['sort' => 'asc','order' => 'stock']) }}">
+                        <i class="fas fa-arrow-up"></i>
+                    </a>
+                    <a href="{{ route('products.index', ['sort' => 'desc','order' => 'stock']) }}">
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
+                </th>
                 <th>Deskripsi</th>
-                <th>Rating</th>
+                <th>Rating
+                    <a href="{{ route('products.index', ['sort' => 'asc','order' => 'rating']) }}">
+                        <i class="fas fa-arrow-up"></i>
+                    </a>
+                    <a href="{{ route('products.index', ['sort' => 'desc','order' => 'rating']) }}">
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
+                </th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -34,5 +71,8 @@
             @endforeach
         </tBody>
     </table>
+
+    {{ $products->links() }}
+
     <a href="{{ route('products.create') }}" class="btn btn-success">Tambah Produk Baru</a>
     @endsection
