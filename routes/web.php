@@ -19,13 +19,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::get('/home', [ProductController::class,"index"])->name('home');
+
 // Route::get('/products', [ProductController::class,"index"]);
 
 // ================= Product routes =================
 
 // Route::get('/list-product', [ProductController::class, "list_product"]);
 
-Route::get('/products', [ProductController::class,"index"])->name('products.index')->middleware('auth');
+// Route::get('/products', [ProductController::class,"index"])->name('products.index')->middleware('auth'); ini memakai auth (jadi ahrus login dahulu)
+
+Route::get('/products', [ProductController::class,"index"])->name('products.index');
 
 Route::get('/products/create', [ProductController::class,"create"])->name('products.create');
 

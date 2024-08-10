@@ -141,6 +141,9 @@ class ProductController extends Controller
     public function detail_product($id)
     {
         $product = Product::find($id);
+        if (!$product) {
+                return response()->json(['message' => 'Produk tidak ditemukan'], 404);
+            }
         return response()->json($product);
     }
 
@@ -170,16 +173,22 @@ class ProductController extends Controller
         ]);
 
         $product = Product::find($id);
+        if (!$product) {
+                return response()->json(['message' => 'Produk tidak ditemukan'], 404);
+            }
         $product->update($request->all());
 
-        return response()->json(['message' => 'Produk berhasil diupdate'], 201);
+        return response()->json(['message' => 'Produk berhasil diupdate'], 200);
     }
 
     public function delete_product($id)
     {
         $product = Product::find($id);
+        if (!$product) {
+                return response()->json(['message' => 'Produk tidak ditemukan'], 404);
+            }
         $product->delete();
 
-        return response()->json(['message' => 'Produk berhasil dihapus'], 201);
+        return response()->json(['message' => 'Produk berhasil dihapus'], 200);
     }
 }
