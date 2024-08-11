@@ -17,6 +17,10 @@
             <input type="number" class="form-control col-10" name="stock" id="stock" required>
         </div>
         <div class="input-group mb-3 row">
+            <label for="name" class="col-2">Gambar:</label>
+            <input type="file" class="form-control-file col-10" name="fileToUpload" id="exampleInputFile">
+        </div>
+        <div class="input-group mb-3 row">
             <label for="name" class="col-2">Description:</label>
             <input type="text" class="form-control col-10" name="description" id="description">
         </div>
