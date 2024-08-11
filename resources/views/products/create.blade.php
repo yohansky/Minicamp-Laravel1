@@ -28,5 +28,5 @@
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
     <br>
-    <a href="{{ route('products.index') }}" class="btn btn-danger">Kembali</a>
+    <a href="{{ route('home') }}" class="btn btn-danger">Kembali</a>
     @endsection

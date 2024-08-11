@@ -15,9 +15,9 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::get('/home', [ProductController::class,"index"])->name('home');
 
@@ -64,4 +64,4 @@ Route::put('/categories/{id}', [CategoryController::class,"update"])->name('cate
 Route::delete('/categories/{id}', [CategoryController::class,"destroy"])->name('categories.destroy');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

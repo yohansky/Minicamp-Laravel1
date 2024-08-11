@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+{{-- <div class="container"> --}}
     <div class="row" style="width: 100%">
         <div class="col-md-2">
-            <button type="button" class="btn btn-secondary button-kiri">Create Product</button>
+            <a href="{{ route('products.create') }}" class="btn btn-success button-kiri">Create Product</a>
+            {{-- <button type="button" class="btn btn-secondary button-kiri">Create Product</button> --}}
         </div>
         <div class="col-md-5" >  
             <div class="input-group mb-3">
@@ -73,5 +74,5 @@
         @endforeach
     </div>
     
-</div>
+{{-- </div> --}}
 @endsection
