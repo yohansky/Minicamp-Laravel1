@@ -2,7 +2,7 @@
 
 @section('content')
     <h2>Tambah Produk Baru</h2>
-    <form action="{{ route('products.store') }}" method="POST">
+    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="input-group mb-3 row">
             <label for="name" class="col-2">Nama Produk:</label>
@@ -18,7 +18,7 @@
         </div>
         <div class="input-group mb-3 row">
             <label for="name" class="col-2">Gambar:</label>
-            <input type="file" class="form-control-file col-10" name="fileToUpload" id="exampleInputFile">
+            <input class="form-control-file col-10 cursor-pointer" type="file" name="image" required>
         </div>
         <div class="input-group mb-3 row">
             <label for="name" class="col-2">Description:</label>

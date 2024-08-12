@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -61,13 +62,25 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
+            'image' => 'required|image|max:2048',
             'description' => 'required|string|max:255',
             'rating' => 'required|integer'
         ]);
 
-        Product::create($request->all());
+        // Product::create($request->all());
+        $cloudinaryImage = $request->file('image')->storeOnCloudinary('products');
+        $url = $cloudinaryImage->getSecurePath();
 
-        return redirect()->route('products.index')->with('success', 'Product created successfully');
+        Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'image' => $url,
+            'description' => $request->description,
+            'rating' => $request->rating,
+        ]);
+
+        return redirect()->route('home')->with('success', 'Product created successfully');
     }
 
     /**
@@ -100,6 +113,7 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
+            'image' => 'required|image|max:2048',
             'description' => 'required|string|max:255',
             'rating' => 'required|integer'
         ]);
@@ -107,7 +121,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->update($request->all());
 
-        return redirect()->route('products.index')->with('success','Product updated successfully');
+        return redirect()->route('home')->with('success','Product updated successfully');
     }
 
     /**
@@ -119,7 +133,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
 
-        return redirect()->route('products.index')->with('success','Product deleted successfully');
+        return redirect()->route('home')->with('success','Product deleted successfully');
     }
 
     /*===========API===========*/
@@ -153,11 +167,23 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
+            'image' => 'required|image|max:2048',
             'description' => 'required|string|max:255',
             'rating' => 'required|integer'
         ]);
 
-        Product::create($request->all());
+        $cloudinaryImage = $request->file('image')->storeOnCloudinary('products');
+        $url = $cloudinaryImage->getSecurePath();
+
+        // Product::create($request->all());
+        Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'image' => $url,
+            'description' => $request->description,
+            'rating' => $request->rating,
+        ]);
 
         return response()->json(['message' => 'Produk berhasil disimpan'], 201);
     }

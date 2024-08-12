@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Edit Produk Baru</h2>
-    <form action="{{ route('products.update', $product->id) }}" method="POST">
+    <h2>Edit Produk</h2>
+    <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="input-group mb-3 row">
@@ -16,6 +16,10 @@
         <div class="input-group mb-3 row">
             <label for="name" class="col-2">Stock:</label>
             <input type="number" class="form-control col-10" name="stock" id="stock" value="{{ $product->stock }}" required>
+        </div>
+        <div class="input-group mb-3 row">
+            <label for="name" class="col-2">Gambar:</label>
+            <input class="form-control-file col-10 cursor-pointer" type="file" name="image" id="image" value="{{ $product->image }}" required>
         </div>
         <div class="input-group mb-3 row">
             <label for="name" class="col-2">Deskripsi:</label>

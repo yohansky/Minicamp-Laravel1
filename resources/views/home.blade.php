@@ -57,16 +57,26 @@
     
     <div class="row row-cols-md-3 g-4">
         @foreach ($products as $product)
-        <div class="col">
-            <div class="card h-100 text-center">
-                {{-- <img src="..." class="card-img-top" alt="..."> --}}
+        <div class="col-md-4">
+            <div class="card text-center">
+                <img src={{ $product->image }} class="card-img-top imagecard" alt="...">
                 <div class="card-body">
                 <h5 class="card-title">{{ $product->name }}</h5>
                 <p class="card-text">Harga: {{ $product->price }}</p>
                 <p class="card-text">Stock: {{ $product->stock }}</p>
                 <div class="row" style="margin-top: 10px">
-                    <div class="col-6 border">Hapus</div>
-                    <div class="col-6 border">Edit</div>
+                    <div class="col-6 border">
+                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </form>
+                        {{-- <i class="fa fa-trash" aria-hidden="true"></i> --}}
+                    </div>
+                    <div class="col-6 border">
+                        <a href="{{ route('products.edit', $product->id) }}" style="color: black"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        
+                    </div>
                 </div>
                 </div>
             </div>
