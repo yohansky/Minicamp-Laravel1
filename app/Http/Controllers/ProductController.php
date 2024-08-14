@@ -113,13 +113,30 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
-            'image' => 'required|image|max:2048',
+            'image' => 'nullable|image|max:2048',
             'description' => 'required|string|max:255',
             'rating' => 'required|integer'
         ]);
 
         $product = Product::find($id);
-        $product->update($request->all());
+
+        if ($request->hasFile('image')) {
+        // Hapus gambar lama jika perlu
+        // Storage::delete($product->image);
+
+        // Upload gambar baru
+        $cloudinaryImage = $request->file('image')->storeOnCloudinary('products');
+        $url = $cloudinaryImage->getSecurePath();
+        $product->image = $url;
+    }
+
+        $product->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'description' => $request->description,
+            'rating' => $request->rating,
+        ]);
 
         return redirect()->route('home')->with('success','Product updated successfully');
     }
