@@ -19,7 +19,10 @@
         </div>
         <div class="input-group mb-3 row">
             <label for="name" class="col-2">Gambar:</label>
-            <input class="form-control-file col-10 cursor-pointer" type="file" name="image" id="image" value="{{ $product->image }}" required>
+            <input class="form-control-file col-10 cursor-pointer" type="file" name="image" id="image" value="{{ $product->image }}" >
+             {{-- @if($product->image)
+                <img src="{{ $product->image }}" alt="Current Image" style="max-height: 300px, max-width: 10px">
+            @endif --}}
         </div>
         <div class="input-group mb-3 row">
             <label for="name" class="col-2">Deskripsi:</label>
@@ -32,4 +35,6 @@
         <br>
         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
     </form>
+    <br>
+    <a href="{{ route('home') }}" class="btn btn-danger">Kembali</a>
     @endsection
